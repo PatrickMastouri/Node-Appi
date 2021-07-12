@@ -1,0 +1,65 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "My User Project CRUDDDDDD",
+		"description": "My User Project Application API",
+		"license": {
+			"name": "MIT",
+			"url": "https://opensource.org/licenses/MIT"
+		}
+	},
+	"host": "localhost:3000",
+	"basePath": "/",
+	"tags": [
+		{
+			"name": "Users",
+			"description": "API for users in the system"
+		}
+	],
+	"paths": {
+		"/api/users": {
+			"get": {
+				"operationId": "get",
+				"tags": ["Users"],
+				"summary": "Get all users in system",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {"$ref": "#/definitions/Users"}
+					}
+				}
+			},
+			"post": {
+				"operationId": "post",
+				"tags": ["Users"],
+				"summary": "Get all users in system",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {"$ref": "#/definitions/Users"}
+					}
+				},
+				"parameters": [{"name": "user","in": "body","description": "User that we want to create","schema": {"$ref": "#/definitions/User"}}]
+			}
+		}
+	},
+ 	"definitions": {
+ 		"User": {
+ 			"required": ["name","id"],
+ 			"properties": {
+ 				"first_name": {"type": "string"},
+ 				"last_name": {"type": "string"},
+				"username": {"type": "string"},
+				"password": {"type": "string"},
+				"email": {"type": "string"}
+
+
+ 			}
+ 		},
+ 		"Users": {"type": "array","$ref": "#/definitions/User"}
+ 	},
+	"schemes": ["http"],
+	"consumes": ["application/json"],
+	"produces": ["application/json"]
+}

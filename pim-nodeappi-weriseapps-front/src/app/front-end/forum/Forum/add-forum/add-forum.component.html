@@ -1,0 +1,64 @@
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+  <div class="container">
+      <div class="section-title" style="padding-top: 100px;">
+          <h2>Forum</h2>
+      </div>
+  </div>
+</section>
+<!-- End Hero -->
+
+
+  <main id="main">
+
+
+
+    <!-- ======= Blog Single Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+
+            <div class="blog-comments">
+
+
+              <div class="reply-form">
+                <h4>New Forum</h4>
+
+                <form [formGroup]="AddForumForm" (submit)="submitForm()">
+
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <input  for="subject" formControlName="subject"  name="subject" type="text" class="form-control" ngModel placeholder="Subject">
+                    </div>
+
+                  </div>
+
+
+
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <input  for="tags" formControlName="tags"  name="tags" type="text" class="form-control" ngModel placeholder="Enter a tags">
+                    </div>
+
+                  </div>
+
+
+                  <div class="row">
+                    <div class="col form-group">
+                      <textarea for="description" formControlName="description"  name="description" class="form-control" placeholder="Description"></textarea>
+                    </div>
+                  </div>
+
+                  <button [disabled]="AddForumForm.invalid" type="submit" class="btn btn-primary" >Post New Forum</button>
+
+                </form>
+              </div>
+            </div><!-- End blog comments -->
+          </div><!-- End blog entries list -->
+        </div>
+      </div>
+    </section><!-- End Blog Single Section -->
+  </main><!-- End #main -->

@@ -1,0 +1,99 @@
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+  <div class="container">
+    <div class="section-title" style="padding-top: 100px;">
+      <h2>Posts</h2>
+    </div>
+  </div>
+</section><!-- End Hero -->
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+
+  <!-- ======= Blog Section ======= -->
+  <section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+
+        <div class="col-lg-8 entries">
+
+          <button type="submit" class="btn btn-primary" routerLink="Addpost">what do u want to post ?</button>
+          <br>
+          <br>
+          <article *ngFor="let p of Posts "  class="entry">
+
+            <div class="entry-img">
+              <img src="assets/assets/img/blog/blog-1.jpg" alt="" class="img-fluid">
+            </div>
+<div *ngIf="p.owner">
+            <span class="material-icons"  (click)="deletePost(p.id)" type="submit">delete</span>
+            <span class="material-icons" routerLink="updatePost/{{p.id}}" type="submit">edit</span>
+
+</div>
+
+
+
+            <h2 class="entry-title">
+              <a >{{p.title}}</a>
+
+            </h2>
+            <h2>
+            <time datetime="2020-01-01">{{p.dateCreated}}</time>
+            </h2>
+            <h1 class="entry-title">
+              <a >{{p.content}}</a>
+            </h1>
+
+            <div class="entry-meta">
+              <ul>
+                <li class="d-flex align-items-center">{{p.user.nom}}</li>
+                <li class="d-flex align-items-center">{{p.dateCreated}}</li>
+                             </ul>
+
+
+            </div>
+
+            <div class="entry-content">
+
+              <div class="read-more">
+
+                <a [routerLink]="['Comments/', p.id]" >Read More</a>
+
+              </div>
+            </div>
+
+          </article><!-- End blog entry -->
+
+          <div class="blog-pagination">
+            <ul class="justify-content-center">
+              <li><a href="#">1</a></li>
+              <li class="active"><a href="#">2</a></li>
+              <li><a href="#">3</a></li>
+            </ul>
+          </div>
+
+        </div><!-- End blog entries list -->
+
+        <div class="col-lg-4">
+
+          <div class="sidebar" >
+
+
+            <h3 class="sidebar-title">Tags</h3>
+            <div class="sidebar-item tags">
+              <ul *ngFor="let p of Posts " >
+                <li class="d-flex align-items-center"><i class="bi bi-hash"></i> <a (click)="ByTag(p.tags)">{{p.tags}}</a></li>
+
+              </ul>
+            </div><!-- End sidebar tags-->
+
+          </div><!-- End sidebar -->
+
+        </div><!-- End blog sidebar -->
+
+      </div>
+
+    </div>
+  </section><!-- End Blog Section -->
+
+</main><!-- End #main -->

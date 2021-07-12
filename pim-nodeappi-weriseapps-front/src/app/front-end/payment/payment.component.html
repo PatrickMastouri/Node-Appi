@@ -1,0 +1,89 @@
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+  <div class="container">
+    <div class="section-title" style="padding-top: 100px;">
+      <h2>Payments</h2>
+    </div>
+  </div>
+</section><!-- End Hero -->
+<br><br><br><br><br><br>
+
+<!-- End Hero -->
+
+<main id="main">
+<!-- ======= Team Section ======= -->
+<section id="team" class="team section-bg">
+    <div class="container" data-aos="fade-up">
+        <div class="row">
+            <!-- ======= project card ======= -->
+                <div class="col-4">
+
+                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;" style="margin-left: 50px;">
+                        <div class="card-body" style="background-color:#37517e;">
+
+                            <div class="form-group">
+                                <label for="name">
+                                    <h5 style="color: white;">Payments</h5>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <a routerLink="/front/payment/myproject" class="btn btn-success">My Payments</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            <!-- End project -->
+            <!-- ======= Functions card ======= -->
+                <div class="col-8">
+                    
+                    <div class="card" style="margin-right: 50px;">
+                        <div class="card-header" style="text-align: center; background-color:#37517e;">
+                            <h5 style="color: white;">Payment</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Cost</th>
+                                    <th scope="col">Methode Of Pay</th>
+                                    <th scope="col">Pay</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                
+                                <tr *ngFor="let project of projects">
+                                    <th scope="row"></th>
+                                    <td>{{ project.name }}</td>
+                                    <td>{{ "100" }}</td>
+                                    <select #t (change)="navigateTo($event)" class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect"  >
+                                      <option selected>Choose...</option>
+                                      <option>paypal</option>
+                                      <option>blockchain</option>
+                                      <option>googlepay</option>
+                                    </select>
+                                    <td> <button AddPayment type="submit" (click)="onSelect(project)" class="btn btn-success" routerLink={{t.value}}  >Pay</button></td>
+                            <!-- routerLink={{t.value}}  #t (input)="navigateTo()"-->                          </tr>
+                          
+                                
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="card-footer text-muted" style="text-align: right; background-color:#37517e;">
+                            <!-- <a class="btn btn-success" (click)="saveChanges()">Save Changes</a> -->
+                        </div>
+                    </div>
+                </div>
+            <!-- End Functions -->    
+        </div>
+    </div>
+</section><!-- End Team Section -->
+
+</main><!-- End #main -->
+
+
+  <!-- =======   <td></td><a class="btn btn-success" routerLink="{{t.value}}">Pay</a></td> ======= -->

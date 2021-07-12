@@ -1,0 +1,109 @@
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+    <div class="container">
+        <div class="section-title" style="padding-top: 100px;">
+            <h2>Create your BackEnd With NodeJs</h2>
+        </div>
+    </div>
+</section>
+<!-- End Hero -->
+
+
+<section id="services" class="services section-bg">
+    <div class="row">
+
+<!-- ======= project card ======= -->
+        <div class="col-4">
+            <div *ngIf="projectError" class="alert alert-danger" role="alert" style="margin-left: 50px;">
+                Cant get Tables!
+            </div>
+            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;" style="margin-left: 50px;">
+                <div class="card-body" style="background-color:#37517e;">
+
+                    <div class="form-group">
+                        <label for="name">
+                            <h5 style="color: white;">Projects :</h5>
+                        </label>
+
+                        <select #myProjectSelect class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" (change)='onProjectOptionsSelected(myProjectSelect.value)'>
+                            <option>Please Select a Project</option>
+                            <option *ngFor="let project of projects">{{ project.name }}</option>
+                        </select>
+                        <div class="validate"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name">
+                            <h5 style="color: white;">tables :</h5>
+                        </label>
+                        <select #myTableSelect class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" (change)='onTableOptionsSelected(myTableSelect.value)' [disabled]="!projectSelected">
+                        <option >Please Select a Table</option>
+                        <option *ngFor="let table of tables">{{ table.name }}</option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+<!-- End project -->
+
+<!-- ======= Functions card ======= -->
+        <div class="col-8">
+            <div *ngIf="updatedSuccessfully" class="alert alert-success" role="alert" style="margin-right: 50px; text-align: center">
+                Updated Successfully
+            </div>
+            <div *ngIf="cantUpdate" class="alert alert-danger" role="alert" style="text-align: center; padding-right: 50px;">
+                Cant Update this Project
+            </div>
+            <div class="card" style="margin-right: 50px;">
+                <div class="card-header" style="text-align: center; background-color:#37517e;">
+                    <h5 style="color: white;">Project : {{ mySelectedProjectValue }}</h5>
+                </div>
+
+                <div *ngIf="tableSelected && projectSelected" class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <p *ngIf="tableSelected" class="font-weight-bold">Table : {{ mySelectedTableValue }}</p>
+                        <li class="list-group-item">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="check2" [(ngModel)]="addisChecked">
+                                        <label class="custom-control-label" for="check2">Create</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="check3" [(ngModel)]="updateisChecked">
+                                        <label class="custom-control-label" for="check3">Update</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="check4" [(ngModel)]="deleteisChecked">
+                                        <label class="custom-control-label" for="check4">Delete</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="check5" [(ngModel)]="showisChecked">
+                                        <label class="custom-control-label" for="check5">Show</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <p class="font-weight-bold">Advanced Functions</p>
+                        <div class="alert alert-primary" style="text-align: center;">
+                            Advanced Functions Will Be Created Soon .....
+                        </div>
+                    </ul>
+                </div>
+                
+                <div *ngIf="tableSelected && projectSelected" class="card-footer text-muted" style="text-align: right; background-color:#37517e;">
+                    <a class="btn btn-success" (click)="saveChanges()">Save Changes</a>
+                    <a class="btn btn-danger" (click)="generateClicked()" style="margin-left: 50px;">Generate the Project Node</a>
+                </div>
+            </div>
+        </div>
+<!-- End Functions -->
+    </div>
+</section>

@@ -1,0 +1,74 @@
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+  <div class="container">
+    <div class="section-title" style="padding-top: 100px;">
+      <h2>Update Posts</h2>
+    </div>
+  </div>
+</section><!-- End Hero -->
+<main id="main">
+
+
+  <!-- ======= Blog Single Section ======= -->
+  <section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+
+        <div class="col-lg-8 entries">
+
+          <!-- End blog entry -->
+
+          <!-- End blog author bio -->
+
+          <div class="blog-comments">
+
+
+
+            <!-- End comment #4 -->
+
+            <div class="reply-form"  *ngIf="post">
+
+              <form [formGroup]="UpdatePost" (submit)="submitForm()">
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <Label>Title</Label>
+                    <input for="title" formControlName="title"  [(ngModel)]="post.title"
+                           name="title" type="text" class="form-control" ngModel placeholder="Title">
+                  </div>
+
+                </div>
+
+                <div class="row">
+                  <div class="col form-group">
+                    <Label>Description</Label>
+                    <textarea for="content" formControlName="content"  [(ngModel)]="post.content"
+                              name="content" class="form-control" ngModel placeholder="Description"></textarea>
+                  </div>
+
+                </div>
+                <div class="col-md-6 form-group">
+                  <Label>Tag</Label>
+                  <input for="tags" formControlName="tags"   [(ngModel)]="post.tags"
+                         name="tags" type="text" class="form-control" ngModel placeholder="tags">
+                </div>
+                <button [disabled]="UpdatePost.invalid" type="submit" type="submit" class="btn btn-primary">Post Updated</button>
+
+              </form>
+
+            </div>
+
+          </div><!-- End blog comments -->
+
+        </div><!-- End blog entries list -->
+
+        <div class="col-lg-4">
+
+
+        </div><!-- End blog sidebar -->
+
+      </div>
+
+    </div>
+  </section><!-- End Blog Single Section -->
+
+</main>

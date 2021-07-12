@@ -1,0 +1,29 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Claims</h1>
+</div>
+<div class="card-body">
+  <div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+      <thead>
+      <tr>
+        <th>subject</th>
+        <th>description</th>
+        <th>State</th>
+        <th>User</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let C of ReclamationList">
+      <tr>
+        <td>{{C.subject}}</td>
+        <td>{{C.description}}</td>
+        <td>{{C.etat}}</td>
+        <td>{{C.user.nom}}</td>
+        <td><span class="material-icons" (click)="changeEtat(C.id)" type="submit">rule</span>
+
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

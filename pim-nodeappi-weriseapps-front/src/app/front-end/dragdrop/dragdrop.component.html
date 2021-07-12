@@ -1,0 +1,298 @@
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+  <div class="container">
+    <div class="section-title" style="padding-top: 100px;">
+      <h2>Create Database with DataBase Visualizer!</h2>
+    </div>
+  </div>
+</section>
+
+<form [formGroup]="projectdb" id="form" novalidate (ngSubmit)="onSubmit(projectdb.value)">
+  <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;"
+    style="margin-top: 50px;margin-right: 50px;margin-left: 50px;">
+    <div class="card-body" style="background-color:#37517e;">
+      <p>DATABASE NAME:<input type="text" placeholder="Database Name" formControlName="dbName" class="form-control"></p>
+      <p>DB TYPE:
+        <select class="custom-select mb-2 mr-sm-2 mb-sm-0" formControlName="dbType">
+          <option>MongoDB</option>
+          <option>MySql</option>
+        </select>
+      </p>
+      <a class="btn btn-success" type="button" (click)="addTable()" title="Click to add a new table">Add Table</a>
+
+    </div>
+  </div>
+  <br>
+
+
+
+  <div class="pcontainer" formArrayName="tables">
+    <div class="project" [style.left.px]="500" id="{{projectdb.get('tables')['controls'][i].get('id').value}}" #t
+      (click)="setPosition(i, t.offsetTop, t.offsetLeft )" [formGroupName]="i"
+      *ngFor="let table of getTables(projectdb); let i = index" style="position:absolute;"
+      [style.top.px]="projectdb.get('tables')['controls'][i].get('x').value"
+      [style.left.px]="projectdb.get('tables')['controls'][i].get('y').value">
+      <div class="title">
+        <input style="margin-top: 5px;" type="text" placeholder="Table Name" formControlName="name" class="form-control"
+          (input)="onTableNameChanges($event.target.value,i)">
+        <a style="margin: 5px;" class="btn btn-primary" (click)="addColumn(i)" title="Click to add a new column">Add
+          Column</a>
+
+        <a style="margin: 5px;" class="btn btn-danger" *ngIf="getTables(projectdb).length > 1"
+          (click)="selectedTableId = i" data-toggle="modal" data-target="#deletetable"
+          title="Click to remove table">Remove Table</a>
+
+
+      </div>
+      <div class="task" formArrayName="columns">
+        <div class="column_container"
+          id="{{projectdb.get('tables')['controls'][i].get('columns')['controls'][j].get('id').value}}" mdbTableCol
+          [formGroupName]="j" *ngFor="let question of getColumns(table); let j = index">
+
+          <div>
+            <h3>{{j}}</h3>
+          </div>
+
+          <div>
+            <input class="form-control" type="text" placeholder="attribute Name" formControlName="name"
+              (input)="onColumnNameChanges($event.target.value,i,j)">
+          </div>
+
+          <div> <select class="custom-select mb-2 mr-sm-2 mb-sm-0" formControlName="datatype">
+              <option>INT</option>
+              <option>VARCHAR</option>
+              <option>DATE</option>
+              <option>DATETIME</option>
+              <option>BOOLEAN</option>
+            </select>
+          </div>
+
+          <div>
+            <input style="inline-size: 50px;" class="form-control" type="checkbox" (click)="primatyKeyCheck(i,j)"
+              formControlName="primaryKey">
+          </div>
+
+          <div>
+
+            <i class="btn btn-danger" *ngIf="getColumns(table).length > 1"
+              (click)="selectedTableId = i;selectedColumnId = j" data-toggle="modal" data-target="#deletecolumn"
+              title="Click to remove column">X</i>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <button class="btn btn-success" type="submit" (click)="onSubmit(projectdb.value)"
+    title="Submit your project">SUBMIT</button>
+
+
+
+
+
+
+
+
+
+
+
+</form>
+
+
+
+
+
+
+<div class="modal fade" id="deletetable" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+
+        <div class="form-group">
+          <p for="recipient-name" class="col-form-label">Are you sure you want to delete the selected table?</p>
+          <button type="submit" class="btn btn-danger" id="{{selectedTableId}}" (click)="removeTable(selectedTableId)"
+            data-dismiss="modal">Yes!</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="deletecolumn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+
+        <div class="form-group">
+          <p for="recipient-name" class="col-form-label">Are you sure you want to delete the selected column?</p>
+          <button type="submit" class="btn btn-danger" (click)="removeColumn(selectedTableId,selectedColumnId)"
+            data-dismiss="modal">Yes!</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+	<button [hidden]="true" type="button" id="changeTypeButton" class="btn btn-primary" data-toggle="modal" data-target="#doubleClicked" >
+    Launch demo modal
+  </button>
+
+<div class="modal fade" id="doubleClicked" tabindex="-1" role="dialog" aria-labelledby="openModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Please select a new connection type:</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <form name="demo">
+        <div class="form-group">
+          <div class="db-cardinality">
+            <ul>
+                <li>
+                    <label>
+                        <input type="radio" checked [(ngModel)]="selectedConnectionType" [value]="'1:1'"  name="rType" jtk-focus jtk-att="type" />
+                        1:1 - One to One
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" [(ngModel)]="selectedConnectionType" [value]="'1:*'"  name="rType"  jtk-att="type"/>
+                        1:* - One to Many
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" [(ngModel)]="selectedConnectionType" [value]="'*:1'"  name="rType" jtk-att="type"/>
+                        *:1 - Many to One
+                    </label>
+                </li>
+            </ul>
+        </div>
+          <button type="submit" class="btn btn-success" (click)="updateType()" 
+            data-dismiss="modal">Proceed!</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<button [hidden]="true" type="button" id="notPrimaryKey" class="btn btn-primary" data-toggle="modal" data-target="#notPK" >
+  Launch demo modal
+</button>
+
+<div class="modal fade" id="notPK" tabindex="-1" role="dialog" aria-labelledby="openModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Alert:</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <div class="form-group">
+        <p for="recipient-name" class="col-form-label">You can only connect columns using Primary Keys</p>
+        <button type="submit" class="btn btn-success"
+          data-dismiss="modal">OK!</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<button [hidden]="true" type="button" id="sameTableConnection" class="btn btn-primary" data-toggle="modal" data-target="#sameTableConn" >
+  Launch demo modal
+</button>
+
+<div class="modal fade" id="sameTableConn" tabindex="-1" role="dialog" aria-labelledby="openModalLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Alert:</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+      <div class="form-group">
+        <p for="recipient-name" class="col-form-label">Can't connect two columns from the same table</p>
+        <button type="submit" class="btn btn-success"
+          data-dismiss="modal">OK!</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<button [hidden]="true" type="button" id="deleteConnection" class="btn btn-primary" data-toggle="modal" data-target="#delcon" >
+  Launch demo modal
+</button>
+
+<div class="modal fade" id="delcon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+
+        <div class="form-group">
+          <p for="recipient-name" class="col-form-label">Are you sure you want to delete the selected connection?</p>
+          <button type="submit" class="btn btn-danger" (click)="removeConn()"
+            data-dismiss="modal">Yes!</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

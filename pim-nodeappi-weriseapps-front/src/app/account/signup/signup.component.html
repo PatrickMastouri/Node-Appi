@@ -1,0 +1,65 @@
+<div class="main">
+    <!-- Sign up form -->
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign up</h2>
+                    <form [formGroup]="registerForm" (submit)="submitForm()" class="register-form" id="register-form" >
+                        <div class="form-group">
+                            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input formControlName="nom" type="text" id="name" name="nom"  placeholder="name">
+                            <div *ngIf="this.registerForm.controls.nom.invalid && (this.registerForm.controls.nom.dirty || this.registerForm.controls.nom.touched)" class="invalid-feedback d-block">
+                                <strong>Name is required (>6)</strong>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" formControlName="username" id="username" name="username"  placeholder="username">
+                            <div *ngIf="this.registerForm.controls.username.invalid && (this.registerForm.controls.username.dirty || this.registerForm.controls.username.touched)" class="invalid-feedback d-block">
+                                <strong>Username is required (>6)</strong>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label for="date"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="date" formControlName="daten" id="date" name="daten"  placeholder="Birth Date">
+                            <div *ngIf="this.registerForm.controls.daten.invalid && (this.registerForm.controls.daten.dirty || this.registerForm.controls.daten.touched)" class="invalid-feedback d-block">
+                                <strong>Date is required</strong>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email"><i class="zmdi zmdi-email"></i></label>
+                            <input type="email" formControlName="email" id="email" name="mail"  placeholder="Your Mail"/>
+                            <div *ngIf="this.registerForm.controls.email.invalid && (this.registerForm.controls.email.dirty || this.registerForm.controls.email.touched)" class="invalid-feedback d-block">
+                                <strong>Email is required and must contains @</strong>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" formControlName="password" id="pass" name="password"  placeholder="Password"/>
+                            <div *ngIf="this.registerForm.controls.password.invalid && (this.registerForm.controls.password.dirty || this.registerForm.controls.password.touched)" class="invalid-feedback d-block">
+                                <strong>Password is required (>6)</strong>
+                            </div>
+                        </div>
+                        <div *ngIf="showError" class="alert alert-danger" role="alert">
+                            {{this.error}}
+                        </div>
+                        <div class="form-group form-button">
+                            <input  type="submit" name="password" id="signup" class="form-submit" value="Register"/>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="signup-image">
+                    <figure><img src="../../../assets/SigninTemp/images/signup-image.jpg" alt="sing up image"></figure>
+                    <a routerLink="/signin" class="signup-image-link">I am already member</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  angular:
+    container_name: angular
+    image: angular
+    ports:
+      - "4200:4200"
+    networks:
+      - nodeapp-network
+  node:
+    container_name: nodeapp
+    image: nodeapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - nodeapp-network
+    volumes:
+      - ../projects:/projects
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/local/bin/docker-compose:/usr/local/bin/docker-compose
+    depends_on: 
+      - mongodb
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - nodeapp-network
+    volumes:
+      - data:/data/db
+networks:
+  nodeapp-network:
+    driver: bridge
+    name: nodeapp-network
+volumes: 
+  data:

@@ -1,0 +1,60 @@
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+    <div class="container">
+        <div class="section-title" style="padding-top: 100px;">
+            <h2>Create New Project</h2>
+        </div>
+    </div>
+</section>
+<!-- End Hero -->
+
+<main id="main">
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+        <div class="container" data-aos="fade-up">
+
+            <!-- ======= project card ======= -->
+
+
+
+
+
+            <form [formGroup]="Project" (submit)="onSubmit()">
+
+                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;" style="margin-left: 50px;">
+                    <div class="card-body" style="background-color:#37517e; text-align:center;">
+
+                        <div class="form-group">
+                            <label for="name">
+                                <h5 style="color: white;">New Project</h5>
+                            </label>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="form-group" style="margin-left: 100px; margin-right: 100px;">
+                                <label for="name">Project Name</label>
+                                <input type="text" id="name" name="name" formControlName="pName" class="form-control" />
+                            </div>
+                            <div class="form-group" style="margin-left: 100px; margin-right: 100px;">
+                                <label for="description">Project Description</label>
+                                <input type="text" id="description" name="description" formControlName="pDescription"
+                                    class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <a class="btn btn-success" type="submit" (click)="onSubmit()" [routerLink]="['/front/projects']">Submit</a>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- End project -->
+        <!-- ======= Functions card ======= -->
+
+
+        <!-- End Functions -->
+
+    </section><!-- End Team Section -->
+
+</main><!-- End #main -->

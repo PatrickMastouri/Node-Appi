@@ -1,0 +1,53 @@
+<div class="main">
+    <!-- Sing in  Form -->
+    <section class="sign-in">
+        <div class="container">
+            <div class="signin-content">
+                <div class="signin-image">
+                    <figure><img src="../../../assets/SigninTemp/images/signin-image.jpg" alt="sing up image"></figure>
+                    <a routerLink="/signup" class="signup-image-link">Create an account</a>
+                </div>
+
+                <div class="signin-form">
+                    <h2 class="form-title">Sign In</h2>
+                    <div *ngIf="showError" class="alert alert-danger" role="alert">
+                        {{this.error}}
+                    </div>
+                    <form [formGroup]="signinForm" (ngSubmit)="submitForm()" class="register-form" id="login-form">
+                        <div class="form-group">
+                            <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" formControlName="email" name="your_name" id="your_name" placeholder="Your Email" />
+                            <div *ngIf="this.signinForm.controls.email.invalid && (this.signinForm.controls.email.dirty || this.signinForm.controls.email.touched)" class="invalid-feedback d-block">
+                                <strong>Email is required and must be valide</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" formControlName="password" name="your_pass" id="your_pass" placeholder="Password"/>
+                            <div *ngIf="this.signinForm.controls.password.invalid && (this.signinForm.controls.password.dirty || this.signinForm.controls.password.touched)" class="invalid-feedback d-block">
+                                <strong>Password is required</strong>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <a (click)="forgetPasswordClicked()" class="signup-image-link">Forget Password</a>
+                            <!--<input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                            <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                            -->
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit"  name="signin" id="signin" class="form-submit" value="Log in"/>
+                        </div>
+                    </form>
+                    <div class="social-login">
+                        <span class="social-label">Or login with</span>
+                        <ul class="socials">
+                            <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                            <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                            <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

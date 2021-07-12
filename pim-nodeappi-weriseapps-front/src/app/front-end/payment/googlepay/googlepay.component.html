@@ -1,0 +1,17 @@
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+  <div class="container">
+    <div class="section-title" style="padding-top: 100px;">
+      <h2>GooglePay</h2>
+    </div>
+  </div>
+</section><!-- End Hero -->
+<google-pay-button
+    environment="TEST"
+    buttonType="buy"
+    buttonColor="black"
+    [paymentRequest]="paymentRequest"
+    (loadpaymentdata)="onLoadPaymentData($event)"
+    (error)="onError($event)"
+    [paymentAuthorizedCallback]="onPaymentDataAuthorized"
+  >
+  </google-pay-button>

@@ -1,0 +1,86 @@
+<main id="main">
+
+  <section id="hero" class="d-flex align-items-center" style="height: 170px;">
+    <div class="container">
+      <div class="section-title" style="padding-top: 100px;">
+        <h2>Comments</h2>
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+
+
+  <!-- ======= Blog Single Section ======= -->
+  <section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row">
+
+        <div class="col-lg-8 entries">
+
+
+
+          <div class="blog-author d-flex align-items-center">
+            <img src="assets/assets/img/blog/blog-author.jpg" class="rounded-circle float-left" alt="">
+            <div>
+
+              <div class="social-links">
+                <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+                <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+                <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+              </div>
+              <h1 class="comments-count" for="title">{{post.title}}</h1>
+              <p>
+                {{post.content}}
+              </p>
+            </div>
+          </div><!-- End blog author bio -->
+
+          <div class="blog-comments">
+
+            <h4 class="comments-count">{{Nbr}}   Comments</h4>
+
+            <div *ngFor="let post of commentsList " id="comment-1" class="comment">
+              <div class="d-flex">
+                <div class="comment-img"><img src="assets/assets/img/blog/comments-1.jpg" alt=""></div>
+                <div>
+                  <h5><a >{{post.user.nom}}</a>
+                    <div *ngIf="post.owner">
+                    <span class="material-icons" (click)="deleteComment(post.id)" type="submit">delete</span>
+                    </div>
+             </h5>
+                  <time datetime="2020-01-01">{{post.updatedAt}}</time>
+                  <p>
+                   {{post.content}}
+                  </p>
+                </div>
+              </div>
+            </div><!-- End comment #1 -->
+
+
+            <div class="reply-form">
+              <h4>Leave a Comment</h4>
+              <p>Required fields are marked * </p>
+              <form [formGroup]="AddCommentsForm" (submit)="submitForm()">
+
+                <div class="row">
+                  <div class="col form-group">
+                    <textarea  for="content" formControlName="content" name="content" class="form-control" ngModel placeholder="content"></textarea>
+                  </div>
+                </div>
+                <button [disabled]="AddCommentsForm.invalid" type="submit" class="btn btn-primary">Post Comment</button>
+
+              </form>
+
+            </div>
+
+          </div><!-- End blog comments -->
+
+        </div><!-- End blog entries list -->
+
+      </div>
+
+    </div>
+  </section><!-- End Blog Single Section -->
+
+</main>

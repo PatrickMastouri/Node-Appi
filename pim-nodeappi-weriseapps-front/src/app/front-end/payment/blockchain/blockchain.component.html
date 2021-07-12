@@ -1,0 +1,37 @@
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+  <div class="container">
+    <div class="section-title" style="padding-top: 100px;">
+      <h2>Blockchain</h2>
+    </div>
+  </div>
+</section><!-- End Hero -->
+
+
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/">
+      <img src="assets/img/logo-savjee.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+      &nbsp;NodeAppi
+    </a>
+  
+    <div>
+      <button routerLink='pending' class="btn btn-outline-light" *ngIf="thereArePendingTransactions()">
+        Pending transactions
+        <span class="badge badge-light">{{blockchain.pendingTransactions.length}}</span>
+      </button>
+      &nbsp;
+      <button routerLink='settings' class="btn btn-outline-light">
+        Settings
+      </button>
+      &nbsp;
+      <button routerLink='transaction' class="btn btn-outline-light">
+        Create transaction
+      </button>
+    </div>
+  </nav>
+  
+  <br>
+ 
+
+  
+  <router-outlet></router-outlet>
+  

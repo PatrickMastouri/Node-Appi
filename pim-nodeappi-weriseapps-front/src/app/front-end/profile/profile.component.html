@@ -1,0 +1,122 @@
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+    <div class="container">
+        <div class="section-title" style="padding-top: 100px;">
+            <h2>Profile</h2>
+        </div>
+    </div>
+</section>
+<!-- End Hero -->
+ 
+<main id="main">
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team section-bg">
+        <div class="container" data-aos="fade-up">
+          <div class="row">
+
+              <div class="col-lg-6">
+                <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100">
+                  <div class="pic"><img src="../../../assets/MainTemp/img/team/team-1.jpg" class="img-fluid"></div>
+                  
+                  <div class="member-info">
+                    <div class="social">
+                      <div class="form-group">
+                        <h4>{{this.user.nom}}</h4>
+                        <h4>{{this.user.prenom}}</h4>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <button (click)='ShowForm = true' type="button" class="btn btn-primary">Edit Profile</button>
+                      </div>
+                    </div>
+                    <span>{{this.user.mail}}</span>
+                    <div class="social">
+                      <div class="form-group">
+                        <button type="button" class="btn btn-warning">Change Picture</button>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <button type="button" class="btn btn-danger">Change Password</button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="col-lg-6" *ngIf="ShowForm">
+                <div class="member d-flex align-items-center" data-aos="zoom-in" data-aos-delay="100">
+                  <form [formGroup]="editProfileForm" (submit)="submitForm()">
+
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                              <label for="firstname">First Name</label>
+                              <input type="text" id="firstname" name="firstname" formControlName="nom" class="form-control" [class.is-invalid]="this.editProfileForm.controls.nom.invalid && (this.editProfileForm.controls.nom.dirty || this.editProfileForm.controls.nom.touched)"/>
+                          </div>
+                          <div class="form-group col-md-6">
+                              <label for="lastname">Last Name</label>
+                              <input type="text" id="lastname" name="lastname" formControlName="prenom" class="form-control" [class.is-invalid]="this.editProfileForm.controls.prenom.invalid && (this.editProfileForm.controls.prenom.dirty || this.editProfileForm.controls.prenom.touched)"/>
+                          </div>
+                      </div>
+
+                      <div class="form-row">
+                          <div class="form-group col-md-6">
+                              <label for="username">UserName</label>
+                              <input type="text" id="username" name="username" formControlName="username" class="form-control" [class.is-invalid]="this.editProfileForm.controls.username.invalid && (this.editProfileForm.controls.username.dirty || this.editProfileForm.controls.username.touched)"/>
+                          </div>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="name">Email</label>
+                        <input [disabled] type="email" id="email" name="email" formControlName="email" class="form-control" [class.is-invalid]="this.editProfileForm.controls.email.invalid && (this.editProfileForm.controls.email.dirty || this.editProfileForm.controls.email.touched)"/>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                          <label for="date">Date</label>
+                          <input type="date" id="date" name="date" formControlName="daten" value="{{ userdaten | date:'yyyy-MM-dd' }}" class="form-control" [class.is-invalid]="this.editProfileForm.controls.daten.invalid && (this.editProfileForm.controls.daten.dirty || this.editProfileForm.controls.daten.touched)"/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="gender">Gender</label>
+                            <select id="gender" name="gender" formControlName="gender" class="form-control" [class.is-invalid]="this.editProfileForm.controls.gender.invalid && (this.editProfileForm.controls.gender.dirty || this.editProfileForm.controls.gender.touched)">
+                              <option value="" >Select an option</option> <option value="1" >Male</option> <option value="2" >Female</option>
+                            </select>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="adresse">Adresse</label>
+                            <input type="text" id="adresse" name="adresse" formControlName="adresse" class="form-control" [class.is-invalid]="this.editProfileForm.controls.adresse.invalid && (this.editProfileForm.controls.adresse.dirty || this.editProfileForm.controls.adresse.touched)"/>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="city">City</label>
+                            <input type="text" id="city" name="city"  formControlName="city" class="form-control" [class.is-invalid]="this.editProfileForm.controls.city.invalid && (this.editProfileForm.controls.city.dirty || this.editProfileForm.controls.city.touched)"/>
+                        </div>
+                      </div>
+
+                      <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="postalcode">PostalCode</label>
+                            <input type="text" id="postalcode" name="postalcode" formControlName="postalcode" class="form-control" [class.is-invalid]="this.editProfileForm.controls.postalcode.invalid && (this.editProfileForm.controls.postalcode.dirty || this.editProfileForm.controls.postalcode.touched)"/>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="phone">Phone</label>
+                            <input type="text" id="phone" name="phone" formControlName="phone" class="form-control" [class.is-invalid]="this.editProfileForm.controls.phone.invalid && (this.editProfileForm.controls.phone.dirty || this.editProfileForm.controls.phone.touched)"/>
+                        </div>
+                      </div>
+
+                      <div class="alert alert-danger" role="alert" *ngIf="showError"> {{ error }} </div>
+                      <div class="alert alert-success" role="alert" *ngIf="updatedSuccessfully"> {{ updatedSucc }} </div>
+
+                      <div class="form-group">
+                          <button type="submit" name="password" id="signup" class="btn btn-primary" value="Register">Save Changes</button>
+                      </div>
+
+                  </form>
+                </div>
+              </div>
+              
+          </div>
+        </div>
+    </section><!-- End Team Section -->
+</main><!-- End #main -->

@@ -1,0 +1,76 @@
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+  <div class="container">
+    <div class="section-title" style="padding-top: 100px;">
+      <h2>Forum</h2>
+
+
+
+    </div>
+  </div>
+</section><!-- End Hero -->
+<div class="main">
+  <div *ngIf="forums" >
+    <main id="main">
+      <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up">
+          <div class="row">
+            <div class="col-lg-8 entries">
+              <div class="list-group">
+                <article *ngFor="let post of forums "  class="entry" >
+                  <div class="d-flex w-100 justify-content-between">
+                    <!--  <a (click)="setId(post.id,post.subject)">-->
+                   <a [routerLink]="['posts',post.id]">
+
+                      <h5 class="mb-1">{{post.subject}}</h5>
+                    </a>
+                    <small>{{post.dateCreated}}</small>
+                  </div>
+                  <p class="mb-1">{{post.description}}</p>
+
+                  <div *ngIf="post.owner">
+                  <span class="material-icons" (click)="deleteForum(post.id)" type="submit">delete</span>
+                  <span class="material-icons" [routerLink]="['/front/Forum/updateforum',post.id]" type="submit">edit</span>
+
+                  </div>
+                </article>
+              </div>
+              <div class="blog-pagination">
+                <ul class="justify-content-center">
+                  <li><a href="#">1</a></li>
+                  <li class="active"><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                </ul>
+              </div>
+            </div><!-- End blog entries list -->
+            <div class="col-lg-4">
+              <div class="sidebar">
+                <button  class="btn btn-info col-md-6" [routerLink]="['/front/Forum/addforum']" type="submit"> Create forum</button >
+                <br><br>
+                <h3 class="sidebar-title">Search</h3>
+                <div class="sidebar-item search-form">
+                  <form action="" (submit)="search(subject.value)">
+                    <input type="text" #subject class="form-control" >
+
+                    <button type="submit" ><span class="material-icons">search</span></button>
+                  </form>
+                </div><!-- End sidebar search formn-->
+                <h3 class="sidebar-title">Tags</h3>
+                <div class="sidebar-item tags">
+                  <ul  *ngFor="let post of forums " >
+                    <li><a (click)="ByTag(post.tag)">{{post.tag}}</a></li>
+
+                  </ul>
+                </div><!-- End sidebar tags-->
+
+              </div><!-- End sidebar -->
+
+            </div><!-- End blog sidebar -->
+
+          </div>
+
+        </div>
+      </section><!-- End Blog Section -->
+
+    </main><!-- End #main -->
+  </div>
+</div>

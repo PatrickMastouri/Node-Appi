@@ -1,0 +1,29 @@
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Forums</h1>
+</div>
+<div class="card-body">
+  <div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
+      <thead>
+      <tr>
+        <th>subject</th>
+        <th>description</th>
+        <th>tag</th>
+        <th>Action</th>
+      </tr>
+      </thead >
+      <tbody *ngFor="let C of forums">
+      <tr>
+
+        <td>{{C.subject}}</td>
+        <td>{{C.description}}</td>
+        <td>{{C.tag}}</td>
+        <td><span class="material-icons" (click)="deleteForum(C.id)" type="submit">delete</span>
+
+        </td>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

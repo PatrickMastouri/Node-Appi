@@ -1,0 +1,33 @@
+<section id="hero" class="d-flex align-items-center" style="height: 170px;">
+  <div class="container">
+    <div class="section-title" style="padding-top: 100px;">
+      <h2>My Projects</h2>
+    </div>
+  </div>
+</section><!-- End Hero -->
+
+<div class="card-body">
+  <table class="table table-striped">
+      <thead>
+      <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Methode Of Payment</th>
+          <th scope="col">Upload</th>
+          <th scope="col">Download</th>
+      </tr>
+      </thead>
+      <tbody>
+      
+      <tr *ngFor="let payment of paymentList">
+          <th scope="row"></th>
+          <td>{{ payment.nom }}</td>
+          <td>{{ payment.paymentmethode }}</td>
+          <td> <i class="btn btn-success" (click)="run(payment.id)" title="Click to run on server">Run on server</i></td>
+          <td> <i class="btn btn-success" (click)="download(payment.id)" title="Click to download">download</i></td>
+
+      </tr>
+      </tbody>
+  </table>
+</div>
+
